@@ -68,7 +68,7 @@ final class ThreadMessageResponse implements ResponseContract, ResponseHasMetaIn
             $content,
             $attributes['assistant_id'],
             $attributes['run_id'],
-            $attributes['file_ids'],
+            $attributes['file_ids'] ?? [],
             $attributes['metadata'],
             $meta,
         );

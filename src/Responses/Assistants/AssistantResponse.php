@@ -9,6 +9,7 @@ use OpenAI\Contracts\ResponseHasMetaInformationContract;
 use OpenAI\Responses\Concerns\ArrayAccessible;
 use OpenAI\Responses\Concerns\HasMetaInformation;
 use OpenAI\Responses\Meta\MetaInformation;
+use OpenAI\Responses\Threads\Runs\ThreadRunResponseToolRetrieval;
 use OpenAI\Testing\Responses\Concerns\Fakeable;
 
 /**
@@ -55,6 +56,7 @@ final class AssistantResponse implements ResponseContract, ResponseHasMetaInform
             fn (array $tool): AssistantResponseToolCodeInterpreter|AssistantResponseToolRetrieval|AssistantResponseToolFunction => match ($tool['type']) {
                 'code_interpreter' => AssistantResponseToolCodeInterpreter::from($tool),
                 'retrieval' => AssistantResponseToolRetrieval::from($tool),
+                'file_search' => ThreadRunResponseToolRetrieval::from($tool),
                 'function' => AssistantResponseToolFunction::from($tool),
             },
             $attributes['tools'],
@@ -69,7 +71,7 @@ final class AssistantResponse implements ResponseContract, ResponseHasMetaInform
             $attributes['model'],
             $attributes['instructions'],
             $tools,
-            $attributes['file_ids'],
+            $attributes['file_ids'] ?? [],
             $attributes['metadata'],
             $meta,
         );

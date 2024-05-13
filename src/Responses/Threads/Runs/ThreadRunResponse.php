@@ -64,6 +64,7 @@ final class ThreadRunResponse implements ResponseContract, ResponseHasMetaInform
             fn (array $tool): ThreadRunResponseToolCodeInterpreter|ThreadRunResponseToolRetrieval|ThreadRunResponseToolFunction => match ($tool['type']) {
                 'code_interpreter' => ThreadRunResponseToolCodeInterpreter::from($tool),
                 'retrieval' => ThreadRunResponseToolRetrieval::from($tool),
+                'file_search' => ThreadRunResponseToolRetrieval::from($tool),
                 'function' => ThreadRunResponseToolFunction::from($tool),
             },
             $attributes['tools'],
@@ -86,7 +87,7 @@ final class ThreadRunResponse implements ResponseContract, ResponseHasMetaInform
             $attributes['model'],
             $attributes['instructions'],
             $tools,
-            $attributes['file_ids'],
+            $attributes['file_ids'] ?? [],
             $attributes['metadata'],
             isset($attributes['usage']) ? ThreadRunResponseUsage::from($attributes['usage']) : null,
             $meta,

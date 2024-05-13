@@ -6,6 +6,7 @@ namespace OpenAI\Responses\Threads\Runs\Steps;
 
 use OpenAI\Contracts\ResponseContract;
 use OpenAI\Responses\Concerns\ArrayAccessible;
+use OpenAI\Responses\Threads\Runs\ThreadRunResponseToolRetrieval;
 use OpenAI\Testing\Responses\Concerns\Fakeable;
 
 /**
@@ -40,6 +41,7 @@ final class ThreadRunStepResponseToolCallsStepDetails implements ResponseContrac
             fn (array $toolCall): ThreadRunStepResponseCodeToolCall|ThreadRunStepResponseRetrievalToolCall|ThreadRunStepResponseFunctionToolCall => match ($toolCall['type']) {
                 'code_interpreter' => ThreadRunStepResponseCodeToolCall::from($toolCall),
                 'retrieval' => ThreadRunStepResponseRetrievalToolCall::from($toolCall),
+                'file_search' => ThreadRunStepResponseRetrievalToolCall::from($toolCall),
                 'function' => ThreadRunStepResponseFunctionToolCall::from($toolCall),
             },
             $attributes['tool_calls'],

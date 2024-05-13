@@ -19,7 +19,7 @@ final class MetaInformation implements MetaInformationContract
         public ?string $requestId,
         public readonly MetaInformationOpenAI $openai,
         public readonly ?MetaInformationRateLimit $requestLimit,
-        public readonly ?MetaInformationRateLimit $tokenLimit,
+        public readonly ?MetaInformationRateLimit $tokenLimit
     ) {
     }
 
@@ -63,7 +63,7 @@ final class MetaInformation implements MetaInformationContract
             $requestId,
             $openai,
             $requestLimit,
-            $tokenLimit,
+            $tokenLimit
         );
     }
 

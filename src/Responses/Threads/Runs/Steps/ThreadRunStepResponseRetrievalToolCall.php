@@ -27,6 +27,7 @@ final class ThreadRunStepResponseRetrievalToolCall implements ResponseContract
         public string $id,
         public string $type,
         public array $retrieval,
+        public array $file_search,
     ) {
     }
 
@@ -40,7 +41,8 @@ final class ThreadRunStepResponseRetrievalToolCall implements ResponseContract
         return new self(
             $attributes['id'],
             $attributes['type'],
-            $attributes['retrieval'],
+            $attributes['retrieval'] ?? [],
+            $attributes['file_search'] ?? [],
         );
     }
 
@@ -53,6 +55,7 @@ final class ThreadRunStepResponseRetrievalToolCall implements ResponseContract
             'id' => $this->id,
             'type' => $this->type,
             'retrieval' => $this->retrieval,
+            'file_search' => $this->file_search,
         ];
     }
 }
